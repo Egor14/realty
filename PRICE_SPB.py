@@ -37,7 +37,7 @@ def Model(data: pd.DataFrame):
     y1 = data[['price']].values.ravel()
     print(X1.shape, y1.shape, flush=True)
 
-    gbr = GradientBoostingRegressor(n_estimators=350, max_depth=8, verbose=5, learning_rate=0.05)
+    gbr = GradientBoostingRegressor(n_estimators=350, max_depth=8, verbose=1, learning_rate=0.05)
     gbr.fit(X1, y1)
     dump(gbr, PATH_TO_PRICE_MODEL_GBR)
 
@@ -63,7 +63,7 @@ def Model(data: pd.DataFrame):
     # Cat Gradient
     cat = CatBoostRegressor(random_state=42, learning_rate=0.1, iterations=1000)
     train = Pool(X1, y1)
-    cat.fit(train, verbose=1)
+    cat.fit(train)
     dump(cat, PATH_TO_PRICE_MODEL_CAT)
 
 def model():
